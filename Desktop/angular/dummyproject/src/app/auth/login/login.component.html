@@ -1,0 +1,43 @@
+<div class="container">
+<div class="card">
+    <div class="card-image">
+        <h2 class="card-heading">
+            Welcome back!
+            <small>Enjoy your day</small>
+        </h2>
+    </div>
+    <form class="card-form" [formGroup]="user" (ngSubmit)="onSubmit()">
+        <div class="input">
+            <input type="email" class="input-field" id="user_email" formControlName="user_email"
+                [ngClass]="{'error': submitted && user.get('user_email')?.valid}">
+            <label for="user_email" class="input-label">Email address</label>
+        </div>
+        
+        <div class="error"
+            *ngIf="myForm['user_email']?.hasError('required') && (myForm['user_email']?.touched || submitted)">
+            Email is required
+        </div>
+        <div class="error"
+            *ngIf="myForm['user_email']?.hasError('email') && (myForm['user_email']?.touched || submitted)">
+            Example: abc@xyz.com
+        </div>
+        <div class="input">
+            <input type="password" class="input-field" id="user_password" formControlName="user_password"
+                [ngClass]="{error: myForm['user_password'].invalid && (myForm['user_password'].touched || submitted)}">
+            <label for="user_password" class="input-label">Password</label>
+        </div>
+    
+        <div class="error"
+            *ngIf="myForm['user_password']?.hasError('required') && (myForm['user_password']?.touched || submitted)">
+            Password is required
+        </div>
+        <div class="error"
+            *ngIf="myForm['user_password']?.hasError('pattern') && (myForm['user_password']?.touched || submitted)">
+            Must contain one Uppercase, one Lowercase, one Number, one special character and minimum length is 7.
+            <strong>For example: Abhinav@15</strong>
+        </div>
+        <div class="error">{{this.errormessage}}</div>
+        <button type="submit" class="action-button"> Submit</button>
+    </form>
+</div>
+</div>
